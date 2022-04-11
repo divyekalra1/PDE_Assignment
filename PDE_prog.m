@@ -2,7 +2,8 @@ c = 1;
 a = 1+2+9+1;
 x = -20:.4:20;
 t = 0:.4:20;
-figure;
+
+subplot(2,1,1);
 u = [];
 for i = 1:length(t)
     f1(i,:) = a*((x+(c*t(i)))<(-a/2) & (x+(c*t(i)))>-a) + (a/2)*((x+(c*t(i)))>(-a/2) & (x+(c*t(i)))<(a/2)) + a*((x+(c*t(i)))>(a/2) & (x+(c*t(i)))<a) + 0;
@@ -12,8 +13,8 @@ end
 s = surf(x,t,u);
 colorbar
 
+subplot(2,1,2);
 h = animatedline;
-figure;
 view(3);
 for i = 1:length(t)
     for j = 1:length(x)
