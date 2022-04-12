@@ -1,10 +1,15 @@
+clc;
+close all;
+clear all;
 c = 1;
 a = 1+2+9+1;
-x = -20:.4:20;
-t = 0:.4:20;
+x = -13:0.5:13;
+t = 0:0.5:10;
+str = "c = " + string(c);
 
-figure(1);
-subplot(2,1,1);
+F1 = figure('Name',"D'Alembert's Solution",'NumberTitle','off');
+F1.Position = [100 100 900 500];
+subplot(2,2,1);
 u = [];
 for i = 1:length(t)
     f1(i,:) = a*((x+(c*t(i)))<(-a/2) & (x+(c*t(i)))>-a) + (a/2)*((x+(c*t(i)))>(-a/2) & (x+(c*t(i)))<(a/2)) + a*((x+(c*t(i)))>(a/2) & (x+(c*t(i)))<a) + 0;
@@ -12,9 +17,19 @@ for i = 1:length(t)
     u = [u ; 0.5*(f1(i,:)+f2(i,:))];
 end
 s = surf(x,t,u);
-colorbar
+title(str);
+xlabel("x axis")
+ylabel("t axis")
+zlabel("u = u(x,t)")
+colorbar 
 
-subplot(2,1,2);
+subplot(2,2,2);
+s = contour(x,t,u);
+title(str);
+xlabel("x axis")
+ylabel("t axis")
+
+subplot(2,2,3:4);
 h = animatedline;
 view(3);
 for i = 1:length(t)
@@ -23,9 +38,13 @@ for i = 1:length(t)
     drawnow
     end
 end
+xlabel("x axis")
+ylabel("t axis")
+zlabel("u = u(x,t)")
 
-figure(2);
-subplot(2,1,1);
+F2 = figure('Name',"D'Alembert's Solution with Exchanged Initial Conditions",'NumberTitle','off');
+F2.Position = [600 100 900 500];
+subplot(2,2,1);
 u = [];
 
 for i = 1:length(t)
@@ -33,9 +52,19 @@ for i = 1:length(t)
     u = [u ; g(i,:)];
 end
 s = surf(x,t,u);
+title(str);
+xlabel("x axis")
+ylabel("t axis")
+zlabel("u = u(x,t)")
 colorbar
 
-subplot(2,1,2);
+subplot(2,2,2);
+s = contour(x,t,u);
+title(str);
+xlabel("x axis")
+ylabel("t axis")
+
+subplot(2,2,3:4);
 h = animatedline;
 view(3);
 for i = 1:length(t)
@@ -44,3 +73,6 @@ for i = 1:length(t)
     drawnow
     end
 end
+xlabel("x axis")
+ylabel("t axis")
+zlabel("u = u(x,t)")
